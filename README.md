@@ -1,6 +1,7 @@
 ![Reviewpad-Background-Logo-Shorter@1 5x](https://user-images.githubusercontent.com/38539/185982194-21bf7bb2-d2d2-40ed-8893-82a216d848a5.png)
 
-# Reviewpad GitHub Action [![x-ray-badge](https://img.shields.io/badge/Time%20to%20Merge-Strong%20team-ee9b00?link=https://xray.reviewpad.com/analysis?repository=https%3A%2F%2Fgithub.com%2Freviewpad%2Faction&style=plastic.svg)](https://xray.reviewpad.com/analysis?repository=https%3A%2F%2Fgithub.com%2Freviewpad%2Faction) [![CIDeploy](https://github.com/reviewpad/action/actions/workflows/cideploy.yml/badge.svg)](https://github.com/reviewpad/action/actions/workflows/cideploy.yml)
+# Reviewpad GitHub Action 
+[![x-ray-badge](https://img.shields.io/badge/Time%20to%20Merge-Strong%20team-ee9b00?link=https://xray.reviewpad.com/analysis?repository=https%3A%2F%2Fgithub.com%2Freviewpad%2Faction&style=plastic.svg)](https://xray.reviewpad.com/analysis?repository=https%3A%2F%2Fgithub.com%2Freviewpad%2Faction) [![CIDeploy](https://github.com/reviewpad/action/actions/workflows/cideploy.yml/badge.svg)](https://github.com/reviewpad/action/actions/workflows/cideploy.yml)
 
 **Latest Stable Version**: v3.x (Faro Edition)
 
@@ -54,7 +55,7 @@ Specifies a workflow to automatically add a label based on the size of the pull 
 
 For more information on the release procedure, check the [RELEASE.md](./RELEASE.md) document.
 
-____
+
 
 ## Inputs
 
@@ -71,7 +72,6 @@ ____
 
 None.
 
-____
 
 ## Usage examples
 
