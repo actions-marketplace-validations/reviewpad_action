@@ -3,15 +3,16 @@
 # Reviewpad GitHub Action 
 [![x-ray-badge](https://img.shields.io/badge/Time%20to%20Merge-Strong%20team-ee9b00?link=https://xray.reviewpad.com/analysis?repository=https%3A%2F%2Fgithub.com%2Freviewpad%2Faction&style=plastic.svg)](https://xray.reviewpad.com/analysis?repository=https%3A%2F%2Fgithub.com%2Freviewpad%2Faction) [![CIDeploy](https://github.com/reviewpad/action/actions/workflows/cideploy.yml/badge.svg)](https://github.com/reviewpad/action/actions/workflows/cideploy.yml)
 
-**Latest Stable Version**: v3.x (Faro Edition)
+🔥 **Latest Stable Version**: v3.x ([Faro](https://en.wikipedia.org/wiki/Faro,_Portugal) Edition)
 
-For **questions**, check out the [discussions](https://github.com/reviewpad/reviewpad/discussions).
+🤔 For **questions**, check out the [discussions](https://github.com/reviewpad/reviewpad/discussions).
 
-For **documentation**, check out this document and the [official documentation](https://docs.reviewpad.com).
+📃 For **documentation**, check out this document and the [official documentation](https://docs.reviewpad.com).
 
-**Join our community on [discord](https://reviewpad.com/discord)!**
+🙌 **Join our community on [discord](https://reviewpad.com/discord)!**
 
-____
+___
+
 
 This action runs the docker image [reviewpad/action](https://hub.docker.com/repository/docker/reviewpad/action).
 
@@ -24,29 +25,16 @@ For example, the following `reviewpad.yml` file:
 ```yaml
 api-version: reviewpad.com/v3.x
 
-rules:
-  - name: is-small
-    kind: patch
-    spec: $size() <= 50
-
-  - name: is-medium
-    kind: patch
-    spec: $size() > 50 && $size() <= 150
-
-  - name: is-large
-    kind: patch
-    spec: $size() > 150
-
 workflows:
   - name: label-pull-request-with-size
     if:
-      - rule: is-small
+      - rule: $size() <= 50
         extra-actions:
           - $addLabel("small")
-      - rule: is-medium
+      - rule: $size() > 50 && $size() <= 150
         extra-actions:
           - $addLabel("medium")
-      - rule: is-large
+      - rule: $size() > 150
         extra-actions:
           - $addLabel("large")
 ```
@@ -56,37 +44,25 @@ Specifies a workflow to automatically add a label based on the size of the pull 
 For more information on the release procedure, check the [RELEASE.md](./RELEASE.md) document.
 
 
-
 ## Inputs
 
 - **event**: The GitHub event context that trigger the action. Uses default `${{ toJSON(github) }}`
 - **file**: The local location of the Reviewpad configuration file. Uses default `./reviewpad.yml`. Ignored if `file_url` is set.
-- **file_url** *(OPTIONAL)*: The remote location of the Reviewpad configuration file.
+- **file_url** *(OPTIONAL)*: The remote location of the Reviewpad configuration file. If set, it will ignore the input `file`.
 - **token**: Uses default `${{ github.token }}`
 
-| :question: `file` vs `file_url`                                                                                            |
-| :------------------------------------------------------------------------------------------------------------------------- |
-| Reviewpad action will try to load reviewpad configuration from `file_url`. If **not set** it will try to load from `file`. |
+## Usage
 
-## Outputs
+### Basic
 
-None.
-
-
-## Usage examples
-
-### Basic example
-
-**This action can be used with any [event](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows) that triggers a workflow.**
-
-Add the following step to a GitHub Action job:
+Add the following step to your GitHub Action job:
 
 ```yaml
 - name: Run reviewpad action
   uses: reviewpad/action@v3.x
 ```
 
-### :link: Remote reviewpad configuration example
+### :link: Remote configuration
 
 You can run reviewpad action with a remote configuration by setting the input `file_url`:
 
@@ -94,18 +70,18 @@ You can run reviewpad action with a remote configuration by setting the input `f
 - name: Run reviewpad action
   uses: reviewpad/action@v3.x
   with:
-    file_url: https://github.com/reviewpad/catalog/blob/main/pr-size-labelling.yml
+    file_url: https://github.com/reviewpad/action/blob/main/templates/start.yml
 ```
 
-### :key: Github token example
+### :key: GitHub token
 
-By default this action uses the `github-actions[bot]` PAT.
+By default this action uses the `github-actions[bot]` token.
 
 As described in the [official GitHub documentation](https://docs.github.com/en/actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow):
 
 > When you use the repository's GITHUB_TOKEN to perform tasks, events triggered by the GITHUB_TOKEN will not create a new workflow run.
 
-If you want to use more advanced features such as the auto-merge feature, we recommend that you explicitly pass a PAT to run this action:
+If you want to use more advanced features such as the [merge](https://docs.reviewpad.com/guides/built-ins#merge) feature, we recommend that you explicitly provide a PAT (Personal Access Token) to run this action:
 
 ```yaml
 - name: Run reviewpad action
@@ -114,4 +90,4 @@ If you want to use more advanced features such as the auto-merge feature, we rec
     token: ${{ secrets.GH_TOKEN }}
 ```
 
-[Please follow this link to know more](https://docs.reviewpad.com/docs/github-action-with-github-token).
+[Please follow this link to know more](https://docs.reviewpad.com/getting-started/installation-with-github-token).
