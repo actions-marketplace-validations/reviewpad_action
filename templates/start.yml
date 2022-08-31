@@ -20,3 +20,26 @@ workflows:
       - rule: $size() > 100
         extra-actions:
           - $addLabel("large")
+
+  - name: empty-description
+    on:
+      - "issue"
+      - "pull_request"
+    always-run: true
+    if:
+      - $description() == ""
+    then: 
+      - '$error("The description is empty. Please add more information!")'
+
+  - name: first-time-issue-contributor
+    on:
+      - "issue"
+      - "pull_request"
+    always-run: true
+    if:
+      - rule: $issueCountBy($author()) == 1
+        extra-actions:
+          - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first issue!", [$author]))'
+      - rule: $pullRequestCountBy($author()) == 1
+        extra-actions:
+          - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first pull request!", [$author]))'
