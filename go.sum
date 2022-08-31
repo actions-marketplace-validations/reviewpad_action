@@ -44,6 +44,8 @@ github.com/reviewpad/go-conventionalcommits v0.10.0 h1:49Fv1q5vougqA7g5mpFZ+W5sQ
 github.com/reviewpad/go-conventionalcommits v0.10.0/go.mod h1:NWUK2G+V+KrhmHW2fBAWGEgZFW8jUXqqBkm9mYJJNi4=
 github.com/reviewpad/reviewpad/v3 v3.3.2-0.20220828182735-7e4bb7cef54a h1:whblVfcrQegEXaqdY903m9sN5Ze1EmdXUA/mmSIenf0=
 github.com/reviewpad/reviewpad/v3 v3.3.2-0.20220828182735-7e4bb7cef54a/go.mod h1:SjlTWz+ZYaAyeE38csT4P4yuq9AtNaoBKkOLOL0D7fw=
+github.com/reviewpad/reviewpad/v3 v3.4.0 h1:iHH1f3RkG+X8E8QP+BByVaKnla4H+BYSo9CJZ2M7jxM=
+github.com/reviewpad/reviewpad/v3 v3.4.0/go.mod h1:SjlTWz+ZYaAyeE38csT4P4yuq9AtNaoBKkOLOL0D7fw=
 github.com/rogpeppe/go-internal v1.8.1 h1:geMPLpDpQOgVyCg5z5GoRwLHepNdb71NXb67XFkP+Eg=
 github.com/shurcooL/githubv4 v0.0.0-20220520033151-0b4e3294ff00 h1:fiFvD4lT0aWjuuAb64LlZ/67v87m+Kc9Qsu5cMFNK0w=
 github.com/shurcooL/githubv4 v0.0.0-20220520033151-0b4e3294ff00/go.mod h1:hAF0iLZy4td2EX+/8Tw+4nodhlMrwN3HupfaXj3zkGo=
