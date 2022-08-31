@@ -37,9 +37,9 @@ workflows:
       - "pull_request"
     always-run: true
     if:
-      - rule: $issueCountBy($author()) == 1
+      - rule: $issueCountBy($author(), "all") == 1
         extra-actions:
           - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first issue!", [$author]))'
-      - rule: $pullRequestCountBy($author()) == 1
+      - rule: $pullRequestCountBy($author(), "all") == 1
         extra-actions:
           - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first pull request!", [$author]))'
