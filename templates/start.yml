@@ -34,12 +34,17 @@ workflows:
   - name: first-time-issue-contributor
     on:
       - "issue"
-      - "pull_request"
     always-run: true
     if:
       - rule: $issueCountBy($author(), "all") == 1
         extra-actions:
           - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first issue!", [$author()]))'
+
+  - name: first-time-pr-contributor
+    on:
+      - "pull_request"
+    always-run: true
+    if:
       - rule: $pullRequestCountBy($author(), "all") == 1
         extra-actions:
           - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first pull request!", [$author()]))'
