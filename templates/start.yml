@@ -39,7 +39,7 @@ workflows:
     if:
       - rule: $issueCountBy($author(), "all") == 1
         extra-actions:
-          - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first issue!", [$author]))'
+          - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first issue!", [$author()]))'
       - rule: $pullRequestCountBy($author(), "all") == 1
         extra-actions:
-          - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first pull request!", [$author]))'
+          - '$commentOnce($sprintf("Welcome @%v! Thank you so much for your first pull request!", [$author()]))'
