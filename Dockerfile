@@ -47,7 +47,7 @@ ENV INPUT_SEMANTIC_SERVICE="0.0.0.0:3006"
 WORKDIR /app
 
 # Semantic service
-COPY --from=build /tmp/${LIBGIT2}/build/libgit2.so* /lib
+COPY --from=build /tmp/${LIBGIT2}/build/libgit2.so* /lib/
 COPY --from=semanticservice /semantic-server /app/semantic-server
 
 COPY --from=build /service/action /app/action
