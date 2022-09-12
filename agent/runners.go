@@ -29,8 +29,7 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	eventPayload, err := github.ParseWebHook(*e.EventName, *e.EventPayload)
 
 	if err != nil {
-		log.Print(err)
-		return
+		log.Fatalln(err)
 	}
 
 	ctx, canc := context.WithTimeout(context.Background(), time.Minute*10)
@@ -49,8 +48,7 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	if entity.Kind == handler.PullRequest {
 		pullRequest, _, err = githubClient.GetPullRequest(ctx, repoOwner, repoName, entity.Number)
 		if err != nil {
-			log.Print(err)
-			return
+			log.Fatalln(err)
 		}
 
 		if pullRequest.Merged != nil && *pullRequest.Merged {
@@ -138,14 +136,12 @@ func RunAction(githubToken, mixpanelToken, rawEvent, file, fileUrl string) {
 	event, err := handler.ParseEvent(rawEvent)
 
 	if err != nil {
-		log.Printf("error parsing event: %v", err)
-		return
+		log.Fatalf("error parsing event: %v", err)
 	}
 
 	targetEntities, err := handler.ProcessEvent(event)
 	if err != nil {
-		log.Printf("error processing event: %v", err)
-		return
+		log.Fatalf("error parsing event: %v", err)
 	}
 
 	event.Token = &githubToken
