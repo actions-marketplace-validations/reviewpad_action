@@ -10,7 +10,8 @@ This repository contains two artifacts:
    
 2. Golang executable and Docker distribution. This executable imports the open source [main Reviewpad repository](https://github.com/reviewpad/reviewpad) and also repositories which are currently private. 
 
-On each push, a workflow is triggered to automatically build and push a new version of the Docker image. This new version is then used in the [canary branch](https://github.com/reviewpad/action/tree/canary) so that we can test experimental versions of the action:
+On each push to the branch `main`, a workflow is triggered to automatically build and push a new version of the Docker image.
+This new version is then used in the [canary branch](https://github.com/reviewpad/action/tree/canary) so that we can test experimental versions of the action:
 
 ```yaml
 name: Reviewpad Action
@@ -25,7 +26,8 @@ jobs:
         uses: reviewpad/action@canary
 ```
 
-We use [semantic versioning](https://semver.org/) for the main Go executable. Its release occurs in the commits with the message `build: update reviewpad to vX.Y.Z` (e.g. [v1.0.0](https://github.com/reviewpad/action/commit/bb1d889ac9ef53627ff0eaae48ee242994b32811)).
+We use [semantic versioning](https://semver.org/) for the main Go executable. 
+Its release occurs in the commits with the message `build: update reviewpad to vX.Y.Z` (e.g. [v1.0.0](https://github.com/reviewpad/action/commit/bb1d889ac9ef53627ff0eaae48ee242994b32811)).
 
 The process of that release is manually done by an official Reviewpad contributor and amounts to tag the commit image with the semantic version and push it.
 
