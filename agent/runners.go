@@ -26,10 +26,16 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	splittedRepo := strings.Split(repo, "/")
 	repoOwner := splittedRepo[0]
 	repoName := splittedRepo[1]
-	eventPayload, err := github.ParseWebHook(*e.EventName, *e.EventPayload)
 
-	if err != nil {
-		log.Fatalln(err)
+	var err error
+	var eventPayload interface{}
+
+	// schedule events do not have a payload.
+	if *e.EventName != "schedule" {
+		eventPayload, err = github.ParseWebHook(*e.EventName, *e.EventPayload)
+		if err != nil {
+			log.Fatalln(err)
+		}
 	}
 
 	ctx, canc := context.WithTimeout(context.Background(), time.Minute*10)
