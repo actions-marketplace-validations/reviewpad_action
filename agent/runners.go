@@ -77,7 +77,7 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	} else {
 		log.Printf("using local config file %s", filePath)
 		if entity.Kind == handler.PullRequest {
-			reviewpadFileChanged, err := utils.ReviewpadFileChanged(ctx, githubClient, filePath, pullRequest)
+			reviewpadFileChanged, err = utils.ReviewpadFileChanged(ctx, githubClient, filePath, pullRequest)
 			if err != nil {
 				log.Fatalln(err)
 			}
