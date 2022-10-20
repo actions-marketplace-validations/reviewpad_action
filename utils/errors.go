@@ -4,7 +4,9 @@
 
 package utils
 
-import "errors"
+import (
+	"errors"
+)
 
 var (
 	ErrBranchNil               = errors.New("branch is nil")

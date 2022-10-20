@@ -34,7 +34,7 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	if *e.EventName != "schedule" {
 		eventPayload, err = github.ParseWebHook(*e.EventName, *e.EventPayload)
 		if err != nil {
-			log.Fatalln(err)
+			utils.LogFatalErr(err)
 		}
 	}
 
@@ -54,7 +54,7 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	if entity.Kind == handler.PullRequest {
 		pullRequest, _, err = githubClient.GetPullRequest(ctx, repoOwner, repoName, entity.Number)
 		if err != nil {
-			log.Fatalln(err)
+			utils.LogFatalErr(err)
 		}
 
 		if pullRequest.Merged != nil && *pullRequest.Merged {
@@ -63,11 +63,11 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 		}
 
 		if err := utils.ValidateBranch(pullRequest.Base); err != nil {
-			log.Fatalln(err)
+			utils.LogFatalErr(err)
 		}
 
 		if err := utils.ValidateBranch(pullRequest.Head); err != nil {
-			log.Fatalln(err)
+			utils.LogFatalErr(err)
 		}
 	}
 
@@ -75,33 +75,33 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 		log.Printf("using remote config file %s", fileUrl)
 		branch, filePath, err := utils.ValidateUrl(fileUrl)
 		if err != nil {
-			log.Fatalln(err)
+			utils.LogFatalErr(err)
 		}
 		if reviewpadFile, err = utils.LoadReviewpadFile(ctx, githubClient, filePath, branch); err != nil {
-			log.Fatalln(err)
+			utils.LogFatalErr(err)
 		}
 	} else {
 		log.Printf("using local config file %s", filePath)
 		if entity.Kind == handler.PullRequest {
 			reviewpadFileChanged, err = utils.ReviewpadFileChanged(ctx, githubClient, filePath, pullRequest)
 			if err != nil {
-				log.Fatalln(err)
+				utils.LogFatalErr(err)
 			}
 
 			if reviewpadFileChanged {
 				if reviewpadFile, err = utils.LoadReviewpadFile(ctx, githubClient, filePath, pullRequest.Head); err != nil {
-					log.Fatalln(err)
+					utils.LogFatalErr(err)
 				}
 			} else {
 				if reviewpadFile, err = utils.LoadReviewpadFile(ctx, githubClient, filePath, pullRequest.Base); err != nil {
-					log.Fatalln(err)
+					utils.LogFatalErr(err)
 				}
 			}
 		} else {
 			reviewpadFileChanged = false
 			defaultBranchName, err := githubClient.GetDefaultRepositoryBranch(ctx, repoOwner, repoName)
 			if err != nil {
-				log.Fatalln(err)
+				utils.LogFatalErr(err)
 			}
 
 			defaultBranch := &github.PullRequestBranch{
@@ -115,7 +115,7 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 			}
 
 			if reviewpadFile, err = utils.LoadReviewpadFile(ctx, githubClient, filePath, defaultBranch); err != nil {
-				log.Fatalln(err)
+				utils.LogFatalErr(err)
 			}
 		}
 	}
@@ -125,11 +125,11 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	exitStatus, err := reviewpad.Run(ctx, githubClient, collectorClient, entity, eventPayload, reviewpadFile, dryRun, reviewpadFileChanged)
 	if err != nil {
 		if reviewpadFile.IgnoreErrors {
-			log.Println(err.Error())
+			utils.LogErr(err)
 			return
 		}
 
-		log.Fatalln(err.Error())
+		utils.LogFatalErr(err)
 	}
 
 	if exitStatus == engine.ExitStatusFailure {
