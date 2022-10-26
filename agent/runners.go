@@ -49,7 +49,7 @@ func runReviewpad(entity *handler.TargetEntity, e *handler.ActionEvent, mixpanel
 	var pullRequest *github.PullRequest
 
 	githubUrl := fmt.Sprintf("github.com/%v/%v/%v/%v", entity.Owner, entity.Repo, entity.Kind, entity.Number)
-	collectorClient := collector.NewCollector(mixpanelToken, entity.Owner, string(entity.Kind), githubUrl)
+	collectorClient := collector.NewCollector(mixpanelToken, entity.Owner, string(entity.Kind), githubUrl, "gh_action")
 
 	if entity.Kind == handler.PullRequest {
 		pullRequest, _, err = githubClient.GetPullRequest(ctx, repoOwner, repoName, entity.Number)

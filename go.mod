@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/google/go-github/v45 v45.2.0
-	github.com/reviewpad/reviewpad/v3 v3.11.0
+	github.com/reviewpad/reviewpad/v3 v3.11.1-0.20221026121531-3c8501aed7e8
 	github.com/stretchr/testify v1.8.0
 )
 
