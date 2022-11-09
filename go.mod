@@ -3,7 +3,7 @@ module github.com/reviewpad/action/v3
 go 1.18
 
 require (
-	github.com/google/go-github/v45 v45.2.0
+	github.com/google/go-github/v48 v48.0.0
 	github.com/reviewpad/reviewpad/v3 v3.12.0
 	github.com/stretchr/testify v1.8.0
 )
@@ -14,6 +14,7 @@ require (
 	github.com/dukex/mixpanel v1.0.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-github/v41 v41.0.0 // indirect
+	github.com/google/go-github/v45 v45.2.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect

@@ -4,7 +4,7 @@
 
 package utils
 
-import "github.com/google/go-github/v45/github"
+import "github.com/google/go-github/v48/github"
 
 func ValidateBranch(branch *github.PullRequestBranch) error {
 	if branch == nil {
